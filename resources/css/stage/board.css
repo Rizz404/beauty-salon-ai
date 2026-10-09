@@ -1,0 +1,283 @@
+/*
+ * The bottom bar. On the home and info scenes it is a dock: a floating pill of
+ * round icons with the label in a tooltip. On the menu and stylists scenes it is
+ * still a rail of cards the guest can scroll sideways (reworked in a later
+ * phase). The chat launcher is positioned beside the dock in chat.css.
+ */
+
+.stage-menu {
+    position: absolute;
+    z-index: 4;
+    left: clamp(300px, 34%, 560px);
+    right: var(--gutter);
+    bottom: var(--gutter);
+    height: var(--board-h);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: 10px 16px;
+    padding: 16px 22px 18px;
+    border: 1px solid var(--line-strong);
+    border-radius: 36px;
+    background: color-mix(in srgb, var(--paper) 90%, transparent);
+    box-shadow: var(--shadow-card);
+    backdrop-filter: blur(16px);
+    color: var(--ink);
+    transition: right .38s var(--ease-cine), opacity .3s ease, visibility .3s;
+}
+
+/* The round chat button sits at the right end of the rail, as it does beside the dock. */
+.stage-menu:has(.item-nav) {
+    right: calc(var(--gutter) + 84px);
+}
+
+.stage-menu > .stage-eyebrow {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+}
+
+.stage-menu-back {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--rose-deep);
+}
+
+.stage-menu-back:hover {
+    text-decoration: underline;
+}
+
+.stage-menu-footer {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+}
+
+.stage-menu:has(.item-nav) .stage-menu-footer {
+    display: none;
+}
+
+/* The dock is centred together with the round chat launcher that sits at its right end. */
+.stage-menu:has(.stage-navigation) {
+    left: calc(50% - (var(--dock-w) + 80px) / 2);
+    right: auto;
+    width: var(--dock-w);
+    height: var(--dock-h);
+    display: block;
+    padding: 0 22px;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter: blur(18px);
+}
+
+/* The dock needs no heading or footer; the aside keeps its aria-label for screen readers. */
+.stage-menu:has(.stage-navigation) > .stage-eyebrow,
+.stage-menu:has(.stage-navigation) > .stage-menu-footer {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.stage-navigation {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 0;
+}
+
+.stage-navigation a {
+    position: relative;
+    display: block;
+    flex: 0 0 auto;
+    transition: transform .25s var(--ease-cine);
+}
+
+.stage-navigation a:hover,
+.stage-navigation a:focus-visible {
+    transform: translateY(-5px);
+}
+
+.nav-icon {
+    display: grid;
+    place-items: center;
+    width: 58px;
+    height: 58px;
+    border: 1px solid var(--line-strong);
+    border-radius: 50%;
+    background: var(--paper);
+    color: var(--rose);
+    transition: background .2s, color .2s, border-color .2s, box-shadow .2s;
+}
+
+.nav-icon svg {
+    width: 26px;
+    height: 26px;
+}
+
+.stage-navigation a:hover .nav-icon {
+    border-color: var(--rose);
+    background: var(--rose-soft);
+}
+
+.stage-navigation a[aria-current] .nav-icon {
+    border-color: var(--rose);
+    background: var(--rose);
+    color: var(--paper);
+    box-shadow: 0 0 0 4px var(--gold-soft);
+}
+
+/* The label rises above its icon as a small tooltip; it stays in the DOM for screen readers. */
+.stage-navigation a > span:last-child {
+    position: absolute;
+    bottom: calc(100% + 12px);
+    left: 50%;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .02em;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    translate: -50% 6px;
+    transition: opacity .18s ease, translate .22s var(--ease-cine);
+}
+
+.stage-navigation a:hover > span:last-child,
+.stage-navigation a:focus-visible > span:last-child {
+    opacity: 1;
+    translate: -50% 0;
+}
+
+.nav-arrow {
+    display: none;
+}
+
+/* Menu and stylists scenes: a row of cards the guest can scroll sideways. */
+.item-nav {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 10px;
+    min-width: 0;
+    min-height: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line-strong) transparent;
+}
+
+.item-nav::-webkit-scrollbar {
+    height: 6px;
+}
+
+.item-nav::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background: var(--line-strong);
+}
+
+.item-nav a {
+    flex: 0 0 232px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 18px 6px 6px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--paper-soft);
+    scroll-snap-align: start;
+    transition: transform .2s var(--ease-cine), background .2s, border-color .2s;
+}
+
+.item-nav a:hover {
+    transform: translateY(-3px);
+    border-color: var(--rose);
+    background: var(--rose-soft);
+}
+
+.item-nav a[aria-current] {
+    border-color: var(--rose);
+    background: var(--rose-soft);
+    box-shadow: inset 0 0 0 1px var(--rose);
+}
+
+.item-nav-thumb {
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    object-fit: cover;
+    background: var(--paper-deep);
+}
+
+.item-nav-text {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+
+.item-nav-name {
+    font-size: 13.5px;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.item-nav-price {
+    font-size: 11.5px;
+    color: var(--ink-soft);
+}
+
+.item-nav-badge {
+    margin-left: 6px;
+    padding: 1px 7px;
+    border-radius: 999px;
+    background: var(--alert-soft);
+    color: var(--alert);
+    font-size: 9px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+
+/* A category label stands upright between its dishes, like the spine of a menu card. */
+.item-nav-heading {
+    flex: 0 0 auto;
+    padding: 4px 2px;
+    transform: rotate(180deg);
+    writing-mode: vertical-rl;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--rose-deep);
+    white-space: nowrap;
+}
+
+/* While the guest is chatting, the board makes room for the drawer. */
+.stage:has(.stage-chat.is-open) .stage-menu {
+    right: calc(var(--drawer) + var(--gutter) * 2);
+}
+
+.stage:has(.stage-chat.is-open) .stage-menu:has(.stage-navigation) {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}

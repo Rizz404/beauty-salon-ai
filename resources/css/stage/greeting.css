@@ -1,0 +1,66 @@
+/*
+ * The speech bubble beside the stylist's face: the greeting, or the scene's
+ * title and narration. It is a round bubble with a tail that points back at
+ * her, not a card sitting on top of her.
+ */
+
+.stage-welcome {
+    position: absolute;
+    z-index: 2;
+    left: clamp(340px, 31vw, 560px);
+    top: clamp(150px, 26vh, 260px);
+    width: min(470px, 34vw);
+    padding: 28px 34px 30px;
+    border-radius: 44px;
+    background: var(--paper);
+    box-shadow: var(--shadow-card);
+    color: var(--ink);
+}
+
+/* The tail: a rounded square turned into a point, aimed at her face on the left. */
+.stage-welcome::after {
+    content: "";
+    position: absolute;
+    left: -11px;
+    top: 52%;
+    width: 28px;
+    height: 28px;
+    border-radius: 0 0 0 9px;
+    background: var(--paper);
+    transform: rotate(45deg);
+}
+
+/* Two small bubbles trail the tail, so it reads as speech drifting out of her. */
+.stage-welcome::before {
+    content: "";
+    position: absolute;
+    left: -34px;
+    top: calc(52% + 30px);
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--paper);
+    box-shadow: -16px 12px 0 -3px var(--paper);
+}
+
+.stage-welcome h1 {
+    margin-top: 10px;
+    font: 600 clamp(30px, 3vw, 46px)/1.08 var(--font-display);
+    letter-spacing: -.02em;
+}
+
+.stage-welcome h1 em {
+    font-weight: 400;
+    color: var(--rose);
+}
+
+.stage-welcome p {
+    margin-top: 14px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+}
+
+.stage-welcome-scene h1 {
+    font-size: clamp(26px, 2.4vw, 38px);
+}
