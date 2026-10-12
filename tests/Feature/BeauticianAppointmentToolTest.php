@@ -66,13 +66,46 @@ class BeauticianAppointmentToolTest extends TestCase
         $this->assertSame(300000.0, (float) $appointment->deposit_total);
         $this->assertSame([true, true, true, true, false, false], StylistSlot::orderBy('time_slot')->pluck('is_booked')->all());
 
-        $taken = $this->runTool($salon, $conversation, 'create_appointment_request', $input);
+        $repeated = $this->runTool($salon, $conversation, 'create_appointment_request', $input);
+        $this->assertSame($appointment->reference, $repeated['ui']['appointment']['appointment_reference']);
+        $this->assertSame(1, Appointment::count());
+
+        $taken = $this->runTool($salon, $conversation, 'create_appointment_request', [...$input, 'guest_name' => 'Budi']);
         $this->assertNull($taken['ui']);
         $this->assertSame(1, Appointment::count());
 
         $busy = $this->runTool($salon, $conversation, 'check_availability', $input);
         $this->assertFalse($busy['ui']['available']);
         $this->assertSame(1, Appointment::count());
+    }
+
+    public function test_the_appointment_tool_needs_a_usable_name_and_contact_before_it_books(): void
+    {
+        $salon = $this->salon();
+        $salon->services()->create(['name' => 'Haircut', 'slug' => 'haircut', 'category' => 'hair', 'price' => 150000, 'duration_minutes' => 30, 'is_active' => true]);
+        $stylist = $salon->stylists()->create(['name' => 'Rina', 'slug' => 'rina', 'specialty' => 'hair', 'is_active' => true]);
+        $conversation = $this->conversation($salon);
+        $date = CarbonImmutable::now($salon->timezone)->addDays(2)->toDateString();
+        $this->openBlocks($stylist->id, $date, ['15:00', '15:30']);
+
+        $base = ['service_slug' => 'haircut', 'stylist_slug' => 'rina', 'date' => $date, 'time_slot' => '15:00'];
+
+        foreach ([
+            ['guest_phone' => '+62 811 111 222'],
+            ['guest_name' => 'Ayu'],
+            ['guest_name' => 'Ayu', 'guest_phone' => 'call me'],
+            ['guest_name' => 'Ayu', 'guest_email' => 'not-an-email'],
+        ] as $guest) {
+            $this->assertNull($this->runTool($salon, $conversation, 'create_appointment_request', [...$base, ...$guest])['ui']);
+        }
+
+        $this->assertSame(0, Appointment::count());
+
+        $byEmail = $this->runTool($salon, $conversation, 'create_appointment_request', [...$base, 'guest_name' => 'Ayu', 'guest_email' => 'ayu@example.com']);
+
+        $this->assertNotNull($byEmail['ui']);
+        $this->assertNotNull($byEmail['ui']['handover']);
+        $this->assertSame('email', Appointment::firstOrFail()->contact_type);
     }
 
     public function test_the_tools_refuse_the_wrong_stylist_an_unknown_start_time_and_a_past_date(): void
