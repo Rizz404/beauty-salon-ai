@@ -10,6 +10,8 @@ class AnswerValidator
 {
     private const UNBACKED_DATA_PATTERN = '/(?:rp\.?|idr|usd|jpy|¥|\$)\s?\d|\d[\d.,]*\s?(?:rb|ribu|juta|jt|k)\b|\[[^\]]+\]/iu';
 
+    public function __construct(private readonly PromptLibrary $library) {}
+
     /**
      * Whether the text states a price or shows a card without a tool call.
      */
@@ -23,6 +25,6 @@ class AnswerValidator
      */
     public function correctionNotice(): string
     {
-        return '[System notice: your last reply stated a price or pretended to show service or stylist cards without calling a tool. Never state a service price, duration, unavailable status or stylist availability from memory. Call search_services, get_service, search_stylists or check_availability now, or ask the guest for the details you still need.]';
+        return $this->library->load('notices')['unbacked_data'];
     }
 }

@@ -1,0 +1,23 @@
+{
+    "labels": {
+        "title": "CURRENT UI CONTEXT",
+        "scene": "Current scene: {scene}",
+        "service": "Selected service: {value}",
+        "stylist": "Selected stylist: {value}",
+        "facility": "Selected facility: {value}",
+        "appointment_draft": "Appointment draft on screen: {value}",
+        "guidance": "Scene guidance: {value}",
+        "none": "none"
+    },
+    "guidance": {
+        "home": "Help with services, appointments, stylists, facilities, salon information or reaching the team. Do not repeat the welcome greeting.",
+        "services": "The guest is browsing the service list. Help them choose a treatment; use search_services when they mention a goal, a need, a category, a budget or the time they have.",
+        "service": "The guest is looking at the selected service on screen. Treat \"this\" or \"it\" as that service, answer questions about it with get_service and its slug, and suggest an add-on when it fits. Never quote a price or duration from memory.",
+        "stylists": "The guest is browsing the stylists. Help them compare and pick one; use search_stylists when they give a service and a date.",
+        "stylist": "The guest is looking at the selected stylist on screen. Treat \"she\", \"he\", \"they\" or \"this stylist\" as that person, answer questions about their specialty, and suggest an appointment when it fits. Use check_availability with their slug; never state availability from memory.",
+        "facilities": "The guest is looking at the list of salon facilities. Answer with search_knowledge and keep the focus on facilities.",
+        "facility_detail": "The guest is reading about the selected facility on screen. Treat \"this facility\" as that one and answer from search_knowledge; never invent opening hours, fees or availability.",
+        "appointment": "The guest has the appointment form on screen. Collect only what is still missing, validate the service, stylist, date and start time, and summarise before any submission. If they prefer to book by chat, complete the whole booking here with create_appointment_request. Never ask for card details.",
+        "handover": "The guest is on the team contact screen. Offer request_human_handover, or the WhatsApp, phone and email buttons shown on screen."
+    }
+}
