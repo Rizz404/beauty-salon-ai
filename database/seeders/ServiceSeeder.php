@@ -29,8 +29,8 @@ class ServiceSeeder extends Seeder
     {
         return [
             [
-                'slug' => 'haircut-blow-dry', 'category' => 'hair', 'name' => 'Haircut & Blow Dry', 'price' => 180000, 'duration_minutes' => 60, 'deposit' => 0,
-                'tags' => ['bestseller', 'halal'], 'cautions' => [], 'is_featured' => true,
+                'slug' => 'haircut-blow-dry', 'category' => 'hair', 'name' => 'Haircut & Blow Dry', 'price' => 250000, 'duration_minutes' => 60, 'deposit' => 0,
+                'tags' => ['bestseller'], 'cautions' => [], 'is_featured' => true,
                 'description' => 'Konsultasi bentuk wajah, potongan presisi, keramas, dan blow dry rapi.',
                 'translations' => [
                     'id' => ['name' => 'Potong Rambut & Blow Dry', 'description' => 'Konsultasi bentuk wajah, potongan presisi, keramas, dan blow dry rapi.'],
@@ -39,7 +39,7 @@ class ServiceSeeder extends Seeder
                 ],
             ],
             [
-                'slug' => 'balayage-color', 'category' => 'hair', 'name' => 'Balayage Color', 'price' => 1450000, 'duration_minutes' => 180, 'deposit' => 300000,
+                'slug' => 'balayage-color', 'category' => 'hair', 'name' => 'Balayage Color', 'price' => 1650000, 'duration_minutes' => 240, 'deposit' => 400000,
                 'tags' => ['signature'], 'cautions' => ['peroxide', 'fragrance'], 'is_featured' => true,
                 'description' => 'Pewarnaan tangan dengan gradasi lembut, termasuk toner, treatment, dan blow dry.',
                 'translations' => [
@@ -49,38 +49,38 @@ class ServiceSeeder extends Seeder
                 ],
             ],
             [
-                'slug' => 'keratin-smoothing', 'category' => 'hair', 'name' => 'Keratin Smoothing', 'price' => 1100000, 'duration_minutes' => 150, 'deposit' => 200000,
-                'tags' => ['ammonia_free'], 'cautions' => ['fragrance'], 'is_featured' => false,
-                'description' => 'Melembutkan dan mengurangi frizz hingga 3 bulan dengan formula bebas amonia.',
+                'slug' => 'keratin-smoothing', 'category' => 'hair', 'name' => 'Keratin Smoothing', 'price' => 1250000, 'duration_minutes' => 180, 'deposit' => 300000,
+                'tags' => [], 'cautions' => ['fragrance'], 'is_featured' => false,
+                'description' => 'Konsultasi kondisi rambut, aplikasi keratin, dan penataan dengan catokan. Hasil dan perawatan lanjut disesuaikan dengan kondisi rambut.',
                 'translations' => [
-                    'id' => ['name' => 'Keratin Smoothing', 'description' => 'Melembutkan dan mengurangi frizz hingga 3 bulan dengan formula bebas amonia.'],
-                    'en' => ['name' => 'Keratin Smoothing', 'description' => 'Softens hair and tames frizz for up to 3 months with an ammonia-free formula.'],
-                    'ja' => ['name' => 'ケラチンスムージング', 'description' => 'アンモニアフリーの処方で、最長3か月間うねりを抑えてやわらかな髪に。'],
+                    'id' => ['name' => 'Keratin Smoothing', 'description' => 'Konsultasi kondisi rambut, aplikasi keratin, dan penataan dengan catokan. Hasil dan perawatan lanjut disesuaikan dengan kondisi rambut.'],
+                    'en' => ['name' => 'Keratin Smoothing', 'description' => 'A hair assessment, keratin application and flat-iron styling. Results and aftercare depend on your hair condition.'],
+                    'ja' => ['name' => 'ケラチンスムージング', 'description' => '髪の状態の確認、ケラチンの塗布、ヘアアイロンでの仕上げ。仕上がりとホームケアは髪の状態に合わせてご案内します。'],
                 ],
             ],
             [
-                'slug' => 'scalp-hair-spa', 'category' => 'hair', 'name' => 'Scalp & Hair Spa', 'price' => 320000, 'duration_minutes' => 60, 'deposit' => 0,
-                'tags' => ['halal', 'vegan', 'sensitive_skin'], 'cautions' => ['essential_oils'], 'is_featured' => false,
-                'description' => 'Pijat kulit kepala, masker nutrisi, dan uap hangat untuk rambut yang kering atau mudah rontok.',
+                'slug' => 'scalp-hair-spa', 'category' => 'hair', 'name' => 'Scalp & Hair Spa', 'price' => 350000, 'duration_minutes' => 60, 'deposit' => 0,
+                'tags' => [], 'cautions' => ['essential_oils'], 'is_featured' => false,
+                'description' => 'Keramas, pijat kulit kepala, masker rambut, dan pengeringan. Cocok untuk sesi perawatan rutin di sela aktivitas.',
                 'translations' => [
-                    'id' => ['name' => 'Spa Rambut & Kulit Kepala', 'description' => 'Pijat kulit kepala, masker nutrisi, dan uap hangat untuk rambut yang kering atau mudah rontok.'],
-                    'en' => ['name' => 'Scalp & Hair Spa', 'description' => 'A scalp massage, a nourishing mask and warm steam for dry or thinning hair.'],
-                    'ja' => ['name' => 'スカルプ＆ヘアスパ', 'description' => '頭皮マッサージ、栄養マスク、温スチームで、乾燥や抜け毛が気になる髪をケア。'],
+                    'id' => ['name' => 'Spa Rambut & Kulit Kepala', 'description' => 'Keramas, pijat kulit kepala, masker rambut, dan pengeringan. Cocok untuk sesi perawatan rutin di sela aktivitas.'],
+                    'en' => ['name' => 'Scalp & Hair Spa', 'description' => 'A wash, scalp massage, hair mask and drying. A practical treatment for your regular hair-care routine.'],
+                    'ja' => ['name' => 'スカルプ＆ヘアスパ', 'description' => 'シャンプー、頭皮マッサージ、ヘアマスク、ドライまで。日常のヘアケアに取り入れやすいメニューです。'],
                 ],
             ],
             [
-                'slug' => 'bridal-updo', 'category' => 'hair', 'name' => 'Bridal Updo', 'price' => 750000, 'duration_minutes' => 90, 'deposit' => 250000,
+                'slug' => 'bridal-updo', 'category' => 'hair', 'name' => 'Bridal Updo', 'price' => 850000, 'duration_minutes' => 90, 'deposit' => 250000,
                 'tags' => ['bridal'], 'cautions' => [], 'is_featured' => false,
-                'description' => 'Sanggul atau tata rambut pengantin, termasuk aksesori dan fiksasi tahan seharian.',
+                'description' => 'Konsultasi gaya, sanggul atau tata rambut pengantin, serta pemasangan aksesori milik tamu. Dilakukan di salon pada satu sesi.',
                 'translations' => [
-                    'id' => ['name' => 'Tata Rambut Pengantin', 'description' => 'Sanggul atau tata rambut pengantin, termasuk aksesori dan fiksasi tahan seharian.'],
-                    'en' => ['name' => 'Bridal Updo', 'description' => 'A bridal updo or hairstyle, with accessories and a hold that lasts all day.'],
-                    'ja' => ['name' => 'ブライダルアップ', 'description' => 'アクセサリー込みのブライダルヘアセット。一日中崩れにくい仕上がりです。'],
+                    'id' => ['name' => 'Tata Rambut Pengantin', 'description' => 'Konsultasi gaya, sanggul atau tata rambut pengantin, serta pemasangan aksesori milik tamu. Dilakukan di salon pada satu sesi.'],
+                    'en' => ['name' => 'Bridal Updo', 'description' => 'A style consultation, bridal updo or hairstyle, and fitting of the guest\'s accessories. One appointment at the salon.'],
+                    'ja' => ['name' => 'ブライダルアップ', 'description' => 'スタイル相談、ブライダルヘアセット、お持ち込みのアクセサリーの取り付け。サロンでの1回の施術です。'],
                 ],
             ],
             [
-                'slug' => 'mens-cut-style', 'category' => 'hair', 'name' => "Men's Cut & Style", 'price' => 120000, 'duration_minutes' => 30, 'deposit' => 0,
-                'tags' => ['for_men', 'quick', 'halal'], 'cautions' => [], 'is_featured' => false,
+                'slug' => 'mens-cut-style', 'category' => 'hair', 'name' => "Men's Cut & Style", 'price' => 180000, 'duration_minutes' => 30, 'deposit' => 0,
+                'tags' => ['for_men', 'quick'], 'cautions' => [], 'is_featured' => false,
                 'description' => 'Potongan pria cepat dengan styling pomade atau clay.',
                 'translations' => [
                     'id' => ['name' => 'Potong Rambut Pria & Styling', 'description' => 'Potongan pria cepat dengan styling pomade atau clay.'],
@@ -89,18 +89,18 @@ class ServiceSeeder extends Seeder
                 ],
             ],
             [
-                'slug' => 'gel-manicure', 'category' => 'nails', 'name' => 'Gel Manicure', 'price' => 220000, 'duration_minutes' => 60, 'deposit' => 0,
+                'slug' => 'gel-manicure', 'category' => 'nails', 'name' => 'Gel Manicure', 'price' => 250000, 'duration_minutes' => 60, 'deposit' => 0,
                 'tags' => ['bestseller'], 'cautions' => ['acrylic'], 'is_featured' => true,
-                'description' => 'Perawatan kuku tangan, kutikula, dan warna gel tahan hingga 3 minggu.',
+                'description' => 'Pembentukan kuku, perawatan kutikula, dan warna gel polos untuk sepuluh kuku. Nail art dan pelepasan gel lama dipesan terpisah.',
                 'translations' => [
-                    'id' => ['name' => 'Manikur Gel', 'description' => 'Perawatan kuku tangan, kutikula, dan warna gel tahan hingga 3 minggu.'],
-                    'en' => ['name' => 'Gel Manicure', 'description' => 'Hand and cuticle care with a gel colour that lasts up to 3 weeks.'],
-                    'ja' => ['name' => 'ジェルマニキュア', 'description' => 'ハンドケアとキューティクルケア、最長3週間持つジェルカラー。'],
+                    'id' => ['name' => 'Manikur Gel', 'description' => 'Pembentukan kuku, perawatan kutikula, dan warna gel polos untuk sepuluh kuku. Nail art dan pelepasan gel lama dipesan terpisah.'],
+                    'en' => ['name' => 'Gel Manicure', 'description' => 'Nail shaping, cuticle care and one plain gel colour on all ten nails. Nail art and removal of old gel are separate requests.'],
+                    'ja' => ['name' => 'ジェルマニキュア', 'description' => '爪の形を整え、キューティクルをケアし、10本にワンカラーのジェルを塗布します。アートや以前のジェルの除去は別途ご相談ください。'],
                 ],
             ],
             [
-                'slug' => 'spa-pedicure', 'category' => 'nails', 'name' => 'Spa Pedicure', 'price' => 260000, 'duration_minutes' => 90, 'deposit' => 0,
-                'tags' => ['halal'], 'cautions' => ['essential_oils'], 'is_featured' => false,
+                'slug' => 'spa-pedicure', 'category' => 'nails', 'name' => 'Spa Pedicure', 'price' => 300000, 'duration_minutes' => 60, 'deposit' => 0,
+                'tags' => [], 'cautions' => ['essential_oils'], 'is_featured' => false,
                 'description' => 'Rendam kaki hangat, scrub, pijat betis, dan pewarna kuku pilihan.',
                 'translations' => [
                     'id' => ['name' => 'Pedikur Spa', 'description' => 'Rendam kaki hangat, scrub, pijat betis, dan pewarna kuku pilihan.'],
@@ -109,18 +109,18 @@ class ServiceSeeder extends Seeder
                 ],
             ],
             [
-                'slug' => 'nail-art-custom', 'category' => 'nails', 'name' => 'Custom Nail Art', 'price' => 380000, 'duration_minutes' => 120, 'deposit' => 100000,
+                'slug' => 'nail-art-custom', 'category' => 'nails', 'name' => 'Custom Nail Art', 'price' => 450000, 'duration_minutes' => 120, 'deposit' => 100000,
                 'tags' => ['signature'], 'cautions' => ['acrylic'], 'is_featured' => false,
-                'description' => 'Desain kuku sesuai foto referensi Anda, dengan gel, foil, atau hiasan kristal.',
+                'description' => 'Manikur gel dengan desain sederhana pada sepuluh kuku. Bawa foto referensi; detail desain dikonfirmasi sebelum sesi dimulai.',
                 'translations' => [
-                    'id' => ['name' => 'Nail Art Kustom', 'description' => 'Desain kuku sesuai foto referensi Anda, dengan gel, foil, atau hiasan kristal.'],
-                    'en' => ['name' => 'Custom Nail Art', 'description' => 'A nail design made from your reference photo, with gel, foil or crystal details.'],
-                    'ja' => ['name' => 'カスタムネイルアート', 'description' => 'ご持参の参考写真をもとに、ジェル、ホイル、クリスタルで仕上げるデザイン。'],
+                    'id' => ['name' => 'Nail Art Kustom', 'description' => 'Manikur gel dengan desain sederhana pada sepuluh kuku. Bawa foto referensi; detail desain dikonfirmasi sebelum sesi dimulai.'],
+                    'en' => ['name' => 'Custom Nail Art', 'description' => 'A gel manicure with a simple design on all ten nails. Bring a reference photo; design details are agreed before the appointment.'],
+                    'ja' => ['name' => 'カスタムネイルアート', 'description' => '10本の爪にシンプルなデザインを施すジェルマニキュア。参考写真をご持参ください。施術前にデザインの詳細を確認します。'],
                 ],
             ],
             [
                 'slug' => 'hydrating-facial', 'category' => 'skin', 'name' => 'Hydrating Facial', 'price' => 450000, 'duration_minutes' => 60, 'deposit' => 0,
-                'tags' => ['sensitive_skin', 'vegan', 'halal'], 'cautions' => ['fragrance'], 'is_featured' => true,
+                'tags' => [], 'cautions' => ['fragrance'], 'is_featured' => true,
                 'description' => 'Pembersihan, eksfoliasi lembut, masker hyaluronic, dan pijat wajah untuk kulit kusam atau kering.',
                 'translations' => [
                     'id' => ['name' => 'Facial Hidrasi', 'description' => 'Pembersihan, eksfoliasi lembut, masker hyaluronic, dan pijat wajah untuk kulit kusam atau kering.'],
@@ -129,28 +129,28 @@ class ServiceSeeder extends Seeder
                 ],
             ],
             [
-                'slug' => 'acne-clearing-facial', 'category' => 'skin', 'name' => 'Acne Clearing Facial', 'price' => 580000, 'duration_minutes' => 90, 'deposit' => 0,
-                'tags' => ['halal'], 'cautions' => ['retinol', 'fragrance'], 'is_featured' => false,
-                'description' => 'Pembersihan pori, ekstraksi aman, dan masker penenang untuk kulit berjerawat.',
+                'slug' => 'acne-clearing-facial', 'category' => 'skin', 'name' => 'Acne Clearing Facial', 'price' => 550000, 'duration_minutes' => 90, 'deposit' => 0,
+                'tags' => [], 'cautions' => ['retinol', 'fragrance'], 'is_featured' => false,
+                'description' => 'Konsultasi kondisi kulit, pembersihan wajah, dan masker. Tahapan disesuaikan dengan kondisi kulit; hasil tiap tamu dapat berbeda.',
                 'translations' => [
-                    'id' => ['name' => 'Facial Jerawat', 'description' => 'Pembersihan pori, ekstraksi aman, dan masker penenang untuk kulit berjerawat.'],
-                    'en' => ['name' => 'Acne Clearing Facial', 'description' => 'Pore cleansing, safe extractions and a calming mask for acne-prone skin.'],
-                    'ja' => ['name' => 'ニキビケアフェイシャル', 'description' => '毛穴クレンジング、安全な角栓ケア、鎮静マスクで、ニキビができやすい肌を整えます。'],
+                    'id' => ['name' => 'Facial Jerawat', 'description' => 'Konsultasi kondisi kulit, pembersihan wajah, dan masker. Tahapan disesuaikan dengan kondisi kulit; hasil tiap tamu dapat berbeda.'],
+                    'en' => ['name' => 'Acne Clearing Facial', 'description' => 'A skin consultation, facial cleansing and a mask. Steps are tailored to your skin condition; results vary between guests.'],
+                    'ja' => ['name' => 'ニキビケアフェイシャル', 'description' => '肌の状態の相談、クレンジング、マスク。肌の状態に合わせて内容を調整し、仕上がりには個人差があります。'],
                 ],
             ],
             [
-                'slug' => 'brightening-peel', 'category' => 'skin', 'name' => 'Brightening Peel', 'price' => 650000, 'duration_minutes' => 60, 'deposit' => 0,
+                'slug' => 'brightening-peel', 'category' => 'skin', 'name' => 'Brightening Peel', 'price' => 600000, 'duration_minutes' => 60, 'deposit' => 0,
                 'tags' => [], 'cautions' => ['retinol', 'peroxide'], 'is_featured' => false,
-                'description' => 'Peeling ringan untuk mencerahkan kulit dan menyamarkan noda ringan.',
+                'description' => 'Konsultasi kulit, eksfoliasi permukaan, dan masker. Kesesuaian perawatan dikonfirmasi oleh terapis sebelum sesi.',
                 'translations' => [
-                    'id' => ['name' => 'Peeling Pencerah', 'description' => 'Peeling ringan untuk mencerahkan kulit dan menyamarkan noda ringan.'],
-                    'en' => ['name' => 'Brightening Peel', 'description' => 'A light peel that brightens the skin and softens minor marks.'],
-                    'ja' => ['name' => 'ブライトニングピール', 'description' => '肌を明るくし、軽いシミやくすみをやわらげる軽めのピーリング。'],
+                    'id' => ['name' => 'Peeling Pencerah', 'description' => 'Konsultasi kulit, eksfoliasi permukaan, dan masker. Kesesuaian perawatan dikonfirmasi oleh terapis sebelum sesi.'],
+                    'en' => ['name' => 'Brightening Peel', 'description' => 'A skin consultation, surface exfoliation and a mask. The therapist confirms suitability before the appointment.'],
+                    'ja' => ['name' => 'ブライトニングピール', 'description' => '肌の相談、表面の角質ケア、マスク。施術前にセラピストがメニューの適合性を確認します。'],
                 ],
             ],
             [
-                'slug' => 'glam-makeup', 'category' => 'makeup', 'name' => 'Glam Makeup', 'price' => 500000, 'duration_minutes' => 60, 'deposit' => 0,
-                'tags' => ['bestseller', 'halal'], 'cautions' => ['latex'], 'is_featured' => true,
+                'slug' => 'glam-makeup', 'category' => 'makeup', 'name' => 'Glam Makeup', 'price' => 650000, 'duration_minutes' => 90, 'deposit' => 100000,
+                'tags' => ['bestseller'], 'cautions' => ['latex'], 'is_featured' => true,
                 'description' => 'Makeup lengkap untuk pesta, wisuda, atau pemotretan, termasuk bulu mata.',
                 'translations' => [
                     'id' => ['name' => 'Makeup Glam', 'description' => 'Makeup lengkap untuk pesta, wisuda, atau pemotretan, termasuk bulu mata.'],
@@ -159,18 +159,18 @@ class ServiceSeeder extends Seeder
                 ],
             ],
             [
-                'slug' => 'bridal-makeup', 'category' => 'makeup', 'name' => 'Bridal Makeup', 'price' => 1800000, 'duration_minutes' => 150, 'deposit' => 500000,
+                'slug' => 'bridal-makeup', 'category' => 'makeup', 'name' => 'Bridal Makeup', 'price' => 2500000, 'duration_minutes' => 120, 'deposit' => 750000,
                 'tags' => ['bridal', 'signature'], 'cautions' => ['latex'], 'is_featured' => true,
-                'description' => 'Makeup pengantin dengan uji coba, tahan seharian, dan touch-up sebelum akad atau resepsi.',
+                'description' => 'Makeup pengantin di salon, persiapan kulit, bulu mata, dan touch-up sebelum tamu berangkat. Trial, tata rambut, dan pendampingan lokasi acara tidak termasuk.',
                 'translations' => [
-                    'id' => ['name' => 'Makeup Pengantin', 'description' => 'Makeup pengantin dengan uji coba, tahan seharian, dan touch-up sebelum akad atau resepsi.'],
-                    'en' => ['name' => 'Bridal Makeup', 'description' => 'Bridal makeup with a trial, all-day wear and a touch-up before the ceremony or reception.'],
-                    'ja' => ['name' => 'ブライダルメイク', 'description' => 'リハーサル付きで一日中崩れにくく、挙式や披露宴前のお直しも含むブライダルメイク。'],
+                    'id' => ['name' => 'Makeup Pengantin', 'description' => 'Makeup pengantin di salon, persiapan kulit, bulu mata, dan touch-up sebelum tamu berangkat. Trial, tata rambut, dan pendampingan lokasi acara tidak termasuk.'],
+                    'en' => ['name' => 'Bridal Makeup', 'description' => 'Bridal makeup at the salon with skin preparation, lashes and a touch-up before departure. Trials, hairstyling and attendance at the venue are not included.'],
+                    'ja' => ['name' => 'ブライダルメイク', 'description' => 'サロンでのブライダルメイク、肌の準備、つけまつげ、出発前のお直し。リハーサル、ヘアセット、会場への同行は含まれません。'],
                 ],
             ],
             [
-                'slug' => 'aromatherapy-massage', 'category' => 'spa', 'name' => 'Aromatherapy Massage', 'price' => 380000, 'duration_minutes' => 60, 'deposit' => 0,
-                'tags' => ['halal'], 'cautions' => ['essential_oils', 'nut_oil'], 'is_featured' => false,
+                'slug' => 'aromatherapy-massage', 'category' => 'spa', 'name' => 'Aromatherapy Massage', 'price' => 400000, 'duration_minutes' => 60, 'deposit' => 0,
+                'tags' => [], 'cautions' => ['essential_oils', 'nut_oil'], 'is_featured' => false,
                 'description' => 'Pijat relaksasi seluruh tubuh dengan minyak esensial pilihan Anda.',
                 'translations' => [
                     'id' => ['name' => 'Pijat Aromaterapi', 'description' => 'Pijat relaksasi seluruh tubuh dengan minyak esensial pilihan Anda.'],
@@ -179,8 +179,8 @@ class ServiceSeeder extends Seeder
                 ],
             ],
             [
-                'slug' => 'deep-tissue-massage', 'category' => 'spa', 'name' => 'Deep Tissue Massage', 'price' => 520000, 'duration_minutes' => 90, 'deposit' => 0,
-                'tags' => ['halal'], 'cautions' => ['nut_oil'], 'is_featured' => false,
+                'slug' => 'deep-tissue-massage', 'category' => 'spa', 'name' => 'Deep Tissue Massage', 'price' => 550000, 'duration_minutes' => 90, 'deposit' => 0,
+                'tags' => [], 'cautions' => ['nut_oil'], 'is_featured' => false,
                 'description' => 'Pijat dengan tekanan kuat untuk punggung, bahu, dan leher yang tegang.',
                 'translations' => [
                     'id' => ['name' => 'Pijat Deep Tissue', 'description' => 'Pijat dengan tekanan kuat untuk punggung, bahu, dan leher yang tegang.'],
