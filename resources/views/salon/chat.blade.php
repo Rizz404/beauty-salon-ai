@@ -13,6 +13,10 @@
             data-label-open="{{ $labels['chat_open'] }}"
             data-label-close="{{ $labels['chat_close'] }}"
             data-label-intro="{{ $labels['chat_intro'] }}"
+            data-label-voice-start="{{ $labels['chat_voice_start'] }}"
+            data-label-voice-stop="{{ $labels['chat_voice_stop'] }}"
+            data-label-voice-listening="{{ $labels['chat_voice_listening'] }}"
+            data-label-voice-denied="{{ $labels['chat_voice_denied'] }}"
             data-label-unavailable="{{ $labels['unavailable'] }}"
             data-label-minutes="{{ $labels['minutes_short'] }}"
             data-label-available-slots="{{ $labels['available_slots'] }}"
@@ -26,6 +30,8 @@
             data-label-status-sent="{{ $labels['chat_status_sent'] }}"
             data-label-status-waiting="{{ $labels['chat_status_waiting'] }}"
             data-label-status-replied="{{ $labels['chat_status_replied'] }}"
+            data-label-chat-expand="{{ $labels['chat_expand'] }}"
+            data-label-chat-collapse="{{ $labels['chat_collapse'] }}"
             data-label-draft-title="{{ $labels['chat_draft_title'] }}"
             data-label-draft-body="{{ $labels['chat_draft_body'] }}"
             data-label-draft-keep="{{ $labels['chat_draft_keep'] }}"
@@ -34,6 +40,12 @@
             data-label-service-details-question="{{ $labels['service_details_question'] }}"
             data-label-book-now="{{ $labels['book_now'] }}"
             data-label-book-slot-question="{{ $labels['book_slot_question'] }}"
+            data-label-book-this-slot-question="{{ $labels['book_this_slot_question'] }}"
+            data-label-book-start-question="{{ $labels['book_start_question'] }}"
+            data-label-appointment-pending="{{ $labels['appointment_pending'] }}"
+            data-label-send-whatsapp="{{ $labels['send_whatsapp'] }}"
+            data-label-call-salon="{{ $labels['call_salon'] }}"
+            data-label-email-salon="{{ $labels['email_salon'] }}"
             data-terms="{{ json_encode(['tag' => $terms['tag'], 'caution' => $terms['caution'], 'specialty' => $terms['specialty'], 'skill' => $terms['skill'], 'unit' => ['years' => $stageCopy['years_unit']]], JSON_UNESCAPED_UNICODE) }}"
             data-label-start-here="{{ $labels['start_here'] }}"
             data-label-staff="{{ $labels['team'] }}"
@@ -44,7 +56,6 @@
             data-home-url="{{ route('salon.show', ['salonSlug' => $salon->slug, 'lang' => $locale]) }}"
             data-service-url="{{ route('salon.service', ['salonSlug' => $salon->slug, 'serviceSlug' => '__SLUG__', 'lang' => $locale]) }}"
             data-staff-url="{{ route('salon.staff', ['salonSlug' => $salon->slug, 'lang' => $locale]) }}"
-            data-appointment-url="{{ route('salon.appointment', ['salonSlug' => $salon->slug, 'lang' => $locale]) }}"
         >
             <section id="beautician-chat-log" class="chat-log" aria-label="{{ $labels['chat_heading'] }}" aria-hidden="true">
                 <header class="chat-log-header">
@@ -57,6 +68,8 @@
                         <p class="truncate text-xs text-stone-500">{{ $labels['chat_subtitle'] }}</p>
                         <p data-chat-status class="chat-status" aria-live="polite" hidden></p>
                     </div>
+                    <button type="button" data-chat-new class="chat-log-new" aria-label="{{ $labels['chat_new'] }}">{{ $labels['chat_new'] }}</button>
+                    <button type="button" data-chat-expand class="chat-log-expand" aria-pressed="false" aria-label="{{ $labels['chat_expand'] }}" title="{{ $labels['chat_expand'] }}"><svg class="chat-expand-icon-wide" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5"/></svg><svg class="chat-expand-icon-narrow" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h5V4M20 9h-5V4M4 15h5v5M20 15h-5v5"/></svg></button>
                     <button type="button" data-chat-close class="chat-log-close" aria-label="{{ $labels['chat_close'] }}"><span aria-hidden="true">×</span></button>
                 </header>
 
@@ -82,6 +95,9 @@
                     placeholder="{{ $labels['chat_placeholder'] }}"
                     autocomplete="off"
                 >
+                <button type="button" data-chat-mic class="chat-mic" aria-pressed="false" aria-label="{{ $labels['chat_voice_start'] }}" title="{{ $labels['chat_voice_start'] }}" hidden>
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+                </button>
                 <button type="submit" data-chat-submit>{{ $labels['chat_send'] }}</button>
             </form>
 

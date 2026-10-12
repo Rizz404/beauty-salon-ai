@@ -6,6 +6,7 @@
  * real DOM, not markdown-in-a-bubble.
  */
 import { getJson, postJson } from './shared/api.js';
+import { renderChatText } from './shared/chat-text.js';
 import { escapeHtml } from './shared/dom.js';
 
 function initBeautician() {
@@ -23,7 +24,6 @@ function initBeautician() {
         homeUrl: root.dataset.homeUrl,
         serviceUrlTemplate: root.dataset.serviceUrl,
         staffUrl: root.dataset.staffUrl,
-        appointmentUrlTemplate: root.dataset.appointmentUrl,
         terms: JSON.parse(root.dataset.terms || '{}'),
         labels: {
             placeholder: root.dataset.labelPlaceholder,
@@ -31,6 +31,10 @@ function initBeautician() {
             open: root.dataset.labelOpen,
             close: root.dataset.labelClose,
             intro: root.dataset.labelIntro,
+            voiceStart: root.dataset.labelVoiceStart,
+            voiceStop: root.dataset.labelVoiceStop,
+            voiceListening: root.dataset.labelVoiceListening,
+            voiceDenied: root.dataset.labelVoiceDenied,
             unavailable: root.dataset.labelUnavailable,
             minutes: root.dataset.labelMinutes,
             availableSlots: root.dataset.labelAvailableSlots,
@@ -44,6 +48,8 @@ function initBeautician() {
             statusSent: root.dataset.labelStatusSent,
             statusWaiting: root.dataset.labelStatusWaiting,
             statusReplied: root.dataset.labelStatusReplied,
+            chatExpand: root.dataset.labelChatExpand,
+            chatCollapse: root.dataset.labelChatCollapse,
             draftTitle: root.dataset.labelDraftTitle,
             draftBody: root.dataset.labelDraftBody,
             draftKeep: root.dataset.labelDraftKeep,
@@ -52,6 +58,12 @@ function initBeautician() {
             serviceDetailsQuestion: root.dataset.labelServiceDetailsQuestion,
             bookNow: root.dataset.labelBookNow,
             bookSlotQuestion: root.dataset.labelBookSlotQuestion,
+            bookThisSlotQuestion: root.dataset.labelBookThisSlotQuestion,
+            bookStartQuestion: root.dataset.labelBookStartQuestion,
+            appointmentPending: root.dataset.labelAppointmentPending,
+            sendWhatsapp: root.dataset.labelSendWhatsapp,
+            callSalon: root.dataset.labelCallSalon,
+            emailSalon: root.dataset.labelEmailSalon,
             startHere: root.dataset.labelStartHere,
             staff: root.dataset.labelStaff,
             error: root.dataset.labelError,
@@ -73,7 +85,11 @@ function initBeautician() {
     const chatLog = root.querySelector('#beautician-chat-log');
     const closeButton = widget.querySelector('[data-chat-close]');
     const launcher = widget.querySelector('[data-chat-launcher]');
+    const newChatButton = widget.querySelector('[data-chat-new]');
+    const expandButton = widget.querySelector('[data-chat-expand]');
+    const micButton = root.querySelector('[data-chat-mic]');
 
+    let recognition = null;
     let ready = false;
     let busy = false;
     let handedOver = false;
@@ -128,6 +144,7 @@ function initBeautician() {
 
     function finishClosePanel({ restoreFocus = true } = {}) {
         isOpen = false;
+        stopListening({ send: false });
         syncPanelState();
         hideDraftDialog();
         if (restoreFocus) launcher?.focus();
@@ -213,8 +230,13 @@ function initBeautician() {
         }
 
         const inner = document.createElement('div');
-        inner.className = `cb-bubble cb-bubble-${role === 'guest' ? 'guest' : 'host'}`;
-        inner.textContent = text;
+        if (role === 'guest') {
+            inner.className = 'cb-bubble cb-bubble-guest';
+            inner.textContent = text;
+        } else {
+            inner.className = 'cb-bubble cb-bubble-host chat-prose';
+            inner.innerHTML = renderChatText(text);
+        }
 
         wrap.appendChild(inner);
         return wrap;
@@ -332,7 +354,15 @@ function initBeautician() {
             <p class="cb-title">${esc(q.service_name)} · ${esc(q.name)}</p>
             <p class="cb-meta">${esc(formatDate(q.date))} · ${esc(q.time_range)} · ${esc(minutesText(q.duration_minutes))}</p>
             <p class="cb-price">${money(q.price)} <span class="cb-meta">· ${esc(depositText(q.deposit))}</span></p>
+            <button type="button" class="cb-button" data-book-slot>${esc(config.labels.bookNow)}</button>
         `;
+        el.querySelector('[data-book-slot]').addEventListener('click', () => {
+            sendMessage(config.labels.bookThisSlotQuestion
+                .replace(':service', q.service_name)
+                .replace(':stylist', q.name)
+                .replace(':date', formatDate(q.date))
+                .replace(':time', q.time_range));
+        });
         return el;
     }
 
@@ -345,7 +375,30 @@ function initBeautician() {
             <p class="cb-meta">${esc(config.labels.reference)}: ${esc(r.appointment_reference)} · ${esc(r.service_name)} · ${esc(r.name)}</p>
             <p class="cb-meta">${esc(formatDate(r.date))} · ${esc(r.time_range)}</p>
             <p class="cb-price">${esc(depositText(r.deposit_total))}</p>
+            <p class="cb-meta">${esc(config.labels.appointmentPending)}</p>
         `;
+
+        const links = [
+            ['whatsapp_url', config.labels.sendWhatsapp],
+            ['phone_url', config.labels.callSalon],
+            ['email_url', config.labels.emailSalon],
+        ].filter(([key]) => payload.handover?.[key]);
+
+        if (links.length) {
+            const row = document.createElement('div');
+            row.className = 'cb-chips';
+            links.forEach(([key, label]) => {
+                const link = document.createElement('a');
+                link.href = payload.handover[key];
+                link.target = '_blank';
+                link.rel = 'noopener';
+                link.className = 'cb-chip';
+                link.textContent = label;
+                row.appendChild(link);
+            });
+            el.appendChild(row);
+        }
+
         return el;
     }
 
@@ -386,6 +439,8 @@ function initBeautician() {
         inputEl.disabled = disabled;
         submitEl.disabled = disabled;
         if (launcher) launcher.disabled = busy || !ready;
+        if (newChatButton) newChatButton.disabled = busy || !ready;
+        if (micButton) micButton.disabled = disabled;
         root.setAttribute('aria-busy', String(busy));
         document.body.classList.toggle('is-thinking', busy);
         if (thinkingIndicator) {
@@ -542,15 +597,8 @@ function initBeautician() {
         if (!actions || !actions.length) return null;
 
         const serviceUrl = (slug) => config.serviceUrlTemplate.replace('__SLUG__', encodeURIComponent(slug));
-        const appointmentUrl = (service, stylist) => {
-            const url = new URL(config.appointmentUrlTemplate, window.location.origin);
-            if (service) url.searchParams.set('service', service);
-            if (stylist) url.searchParams.set('stylist', stylist);
-            return url.toString();
-        };
         const targets = {
             view_service: [config.labels.viewDetails, (action) => serviceUrl(action.service)],
-            book: [config.labels.bookNow, (action) => appointmentUrl(action.service, action.stylist)],
             staff: [config.labels.staff, () => config.staffUrl],
         };
 
@@ -558,6 +606,18 @@ function initBeautician() {
         wrap.className = 'cb-chips';
 
         actions.forEach((action) => {
+            // Booking happens in the conversation itself, so it asks the
+            // beautician instead of walking to the appointment page.
+            if (action.action === 'book') {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'cb-chip';
+                button.textContent = config.labels.bookNow;
+                button.addEventListener('click', () => sendMessage(config.labels.bookStartQuestion));
+                wrap.appendChild(button);
+                return;
+            }
+
             const target = targets[action.action];
             if (!target) return;
             const link = document.createElement('a');
@@ -689,6 +749,159 @@ function initBeautician() {
         scrollToBottom();
     }
 
+    function showConnectionError() {
+        statusBanner.textContent = root.dataset.labelConnectionError;
+        statusBanner.classList.remove('hidden');
+        messagesEl.appendChild(bubble('assistant', config.labels.intro));
+    }
+
+    /** Wipes this browser's conversation and starts a fresh one with a new guest token. */
+    async function startNewChat() {
+        if (!ready || busy) return;
+
+        ready = false;
+        stopListening({ send: false });
+        stopPolling();
+        localStorage.removeItem(config.storageKey);
+        messagesEl.replaceChildren();
+        handedOver = false;
+        knownMessageCount = 0;
+        statusBanner.classList.add('hidden');
+        setChatStatus('');
+        inputEl.value = '';
+        setBusy(true);
+
+        try {
+            await boot();
+            ready = true;
+        } catch {
+            showConnectionError();
+        } finally {
+            setBusy(false);
+            scrollToBottom();
+            if (ready) inputEl.focus();
+        }
+    }
+
+    newChatButton?.addEventListener('click', startNewChat);
+
+    /** Widens the panel on desktop; remembered across pages, ignored where storage is blocked. */
+    const expandedKey = 'beautician_chat_expanded';
+
+    function setExpanded(expanded, { remember = true } = {}) {
+        root.classList.toggle('is-expanded', expanded);
+        const label = expanded ? config.labels.chatCollapse : config.labels.chatExpand;
+        expandButton?.setAttribute('aria-pressed', String(expanded));
+        expandButton?.setAttribute('aria-label', label);
+        expandButton?.setAttribute('title', label);
+
+        if (!remember) return;
+
+        try {
+            localStorage.setItem(expandedKey, expanded ? '1' : '0');
+        } catch { /* the preference just is not remembered */ }
+    }
+
+    expandButton?.addEventListener('click', () => {
+        setExpanded(!root.classList.contains('is-expanded'));
+        scrollToBottom();
+    });
+
+    try {
+        if (localStorage.getItem(expandedKey) === '1') setExpanded(true, { remember: false });
+    } catch { /* storage blocked */ }
+
+    /**
+     * Voice input through the browser's speech recognition (no server round
+     * trip for audio). The spoken question fills the input as it is heard and
+     * is sent as soon as the guest stops talking.
+     */
+    const SpeechRecognitionApi = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const speechLocales = { ja: 'ja-JP', en: 'en-US', id: 'id-ID' };
+
+    function setListening(listening) {
+        if (!micButton) return;
+
+        const label = listening ? config.labels.voiceStop : config.labels.voiceStart;
+        micButton.classList.toggle('is-listening', listening);
+        micButton.setAttribute('aria-pressed', String(listening));
+        micButton.setAttribute('aria-label', label);
+        micButton.title = label;
+        inputEl.placeholder = listening ? config.labels.voiceListening : config.labels.placeholder;
+    }
+
+    /** Stops listening; with `send: false` whatever was heard so far is thrown away. */
+    function stopListening({ send = true } = {}) {
+        if (!recognition) return;
+
+        if (send) {
+            recognition.stop();
+            return;
+        }
+
+        recognition.discarded = true;
+        recognition.abort();
+    }
+
+    function startListening() {
+        if (!SpeechRecognitionApi || recognition || !ready || busy || handedOver) return;
+
+        const session = new SpeechRecognitionApi();
+        let transcript = '';
+        let failed = false;
+
+        session.lang = speechLocales[config.locale] || speechLocales.id;
+        session.interimResults = true;
+        session.continuous = false;
+
+        session.addEventListener('result', (event) => {
+            transcript = Array.from(event.results).map((result) => result[0].transcript).join('').trim();
+            inputEl.value = transcript;
+        });
+
+        session.addEventListener('error', (event) => {
+            failed = true;
+            if (event.error !== 'not-allowed' && event.error !== 'service-not-allowed') return;
+
+            setChatStatus(config.labels.voiceDenied, 'error');
+            window.setTimeout(() => {
+                if (chatStatus.textContent === config.labels.voiceDenied) setChatStatus('');
+            }, 6000);
+        });
+
+        session.addEventListener('end', () => {
+            if (recognition === session) {
+                recognition = null;
+                setListening(false);
+            }
+
+            if (session.discarded) {
+                if (transcript) inputEl.value = '';
+                return;
+            }
+
+            if (failed || !transcript || busy || handedOver) return;
+
+            inputEl.value = '';
+            sendMessage(transcript);
+        });
+
+        recognition = session;
+        setListening(true);
+
+        try {
+            session.start();
+        } catch {
+            recognition = null;
+            setListening(false);
+        }
+    }
+
+    if (micButton && SpeechRecognitionApi) {
+        micButton.hidden = false;
+        micButton.addEventListener('click', () => (recognition ? stopListening() : startListening()));
+    }
+
     formEl.addEventListener('submit', (event) => {
         event.preventDefault();
         if (!ready || busy || handedOver || !inputEl.value.trim()) return;
@@ -713,11 +926,7 @@ function initBeautician() {
     boot().then(() => {
         ready = true;
         scrollToBottom();
-    }).catch(() => {
-        statusBanner.textContent = root.dataset.labelConnectionError;
-        statusBanner.classList.remove('hidden');
-        messagesEl.appendChild(bubble('assistant', config.labels.intro));
-    }).finally(() => {
+    }).catch(showConnectionError).finally(() => {
         setBusy(false);
 
         // The guest chose this topic from the menu on the previous scene:
