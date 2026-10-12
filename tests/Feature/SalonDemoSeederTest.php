@@ -5,12 +5,15 @@ namespace Tests\Feature;
 use App\Models\Salon;
 use App\Models\Service;
 use App\Models\Stylist;
+use App\Models\StylistImage;
 use App\Models\StylistSlot;
 use App\Modules\Appointment\Support\StylistAvailability;
 use Carbon\CarbonImmutable;
 use Database\Seeders\DatabaseSeeder;
 use Database\Seeders\SalonDemoSeeder;
 use Database\Seeders\SalonSeeder;
+use Database\Seeders\StylistImageSeeder;
+use Database\Seeders\StylistSeeder;
 use Database\Seeders\StylistSlotSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -48,6 +51,38 @@ class SalonDemoSeederTest extends TestCase
             ->assertSee('Potong Rambut &amp; Blow Dry', false)
             ->assertSee('IDR 250.000')
             ->assertSee('images/services/haircut-blow-dry.webp', false);
+
+        $this->get('/beauty-salon-ai/stylists/rina-pratama')
+            ->assertOk()
+            ->assertSee('images/stylists/rina-pratama-1.webp', false)
+            ->assertSee('images/stylists/rina-pratama-2.webp', false);
+    }
+
+    public function test_reseeding_upgrades_legacy_portfolio_images_without_duplicates_or_changing_custom_photos(): void
+    {
+        $this->seed([SalonSeeder::class, StylistSeeder::class]);
+        $rina = Stylist::where('slug', 'rina-pratama')->firstOrFail();
+        $legacyImage = StylistImage::factory()->for($rina)->create(['image_url' => 'images/stylists/rina-pratama-1.svg']);
+        $currentImage = StylistImage::factory()->for($rina)->create(['image_url' => 'images/stylists/rina-pratama-2.webp']);
+        $customImage = StylistImage::factory()->for($rina)->create([
+            'image_url' => 'https://example.test/custom-photo.webp',
+            'alt_text' => 'Foto tambahan Rina',
+            'sort_order' => 9,
+        ]);
+
+        $this->seed(StylistImageSeeder::class);
+        $this->seed(StylistImageSeeder::class);
+
+        $this->assertDatabaseCount('stylist_images', 13);
+        $this->assertDatabaseHas('stylist_images', ['id' => $legacyImage->id, 'image_url' => 'images/stylists/rina-pratama-1.webp', 'sort_order' => 0]);
+        $this->assertDatabaseHas('stylist_images', ['id' => $currentImage->id, 'image_url' => 'images/stylists/rina-pratama-2.webp', 'sort_order' => 1]);
+        $this->assertDatabaseHas('stylist_images', [
+            'id' => $customImage->id,
+            'image_url' => 'https://example.test/custom-photo.webp',
+            'alt_text' => 'Foto tambahan Rina',
+            'sort_order' => 9,
+        ]);
+        $this->assertDatabaseMissing('stylist_images', ['image_url' => 'images/stylists/rina-pratama-1.svg']);
     }
 
     public function test_default_production_seeding_explains_how_to_load_the_sample_without_creating_data(): void
