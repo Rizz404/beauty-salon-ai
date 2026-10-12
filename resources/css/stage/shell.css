@@ -24,7 +24,7 @@
         linear-gradient(180deg, rgb(255 248 245 / .62) 0, rgb(255 248 245 / .18) 10%, transparent 20%);
 }
 
-/* She stands in the salon, left of centre, and is cut flat at the bottom edge. */
+/* The stylist portrait sits left of centre and fades into the salon floor. */
 .stage-character {
     position: absolute;
     z-index: 0;
@@ -35,6 +35,8 @@
     max-width: 40%;
     object-fit: contain;
     object-position: bottom left;
+    border-radius: 48% 48% 0 0;
+    mask-image: linear-gradient(to bottom, #000 78%, transparent 100%);
     pointer-events: none;
     animation: character-arrive .6s var(--ease-cine) .08s backwards;
 }

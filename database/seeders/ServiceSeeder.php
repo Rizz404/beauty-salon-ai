@@ -15,7 +15,7 @@ class ServiceSeeder extends Seeder
         foreach ($this->serviceDefinitions() as $definition) {
             $salon->services()->updateOrCreate(
                 ['slug' => $definition['slug']],
-                [...$definition, 'image_url' => 'images/services/'.$definition['slug'].'.svg', 'sort_order' => $sort++, 'is_active' => true]
+                [...$definition, 'image_url' => 'images/services/'.$definition['slug'].'.webp', 'sort_order' => $sort++, 'is_active' => true]
             );
         }
     }

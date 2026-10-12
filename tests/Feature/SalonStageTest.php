@@ -151,6 +151,27 @@ class SalonStageTest extends TestCase
         $this->get('/demo/stylists/nowhere')->assertNotFound();
     }
 
+    public function test_existing_service_artwork_displays_the_photo_without_changing_the_stored_path(): void
+    {
+        $this->haircut->update(['image_url' => 'images/services/haircut-blow-dry.svg']);
+
+        $this->get('/demo/services/haircut')
+            ->assertOk()
+            ->assertSee('images/services/haircut-blow-dry.webp', false)
+            ->assertDontSee('images/services/haircut-blow-dry.svg', false);
+
+        $this->assertSame('images/services/haircut-blow-dry.svg', $this->haircut->fresh()->image_url);
+    }
+
+    public function test_external_service_images_keep_their_original_url(): void
+    {
+        $this->haircut->update(['image_url' => 'https://example.test/images/services/haircut-blow-dry.svg']);
+
+        $this->get('/demo/services/haircut')
+            ->assertOk()
+            ->assertSee('https://example.test/images/services/haircut-blow-dry.svg', false);
+    }
+
     public function test_the_facility_scenes_show_stored_amenities(): void
     {
         $facility = $this->salon->knowledgeItems()->where('category', 'facilities')->firstOrFail();
