@@ -20,7 +20,7 @@ final class StageBackdrop
             'image' => asset($artwork['image']),
             'focus' => $artwork['focus'],
             'focusMobile' => $artwork['focusMobile'],
-            'character' => asset($artwork['character']),
+            'character' => self::versionedAssetUrl($artwork['character']),
             'anchor' => $artwork['anchor'],
             'text' => $artwork['text'],
             'avatarImage' => self::avatar(),
@@ -29,6 +29,18 @@ final class StageBackdrop
 
     public static function avatar(): string
     {
-        return asset(config('salon.avatar_image'));
+        return self::versionedAssetUrl(config('salon.avatar_image'));
+    }
+
+    private static function versionedAssetUrl(string $path): string
+    {
+        $url = asset($path);
+        $filePath = public_path($path);
+
+        if (! is_file($filePath)) {
+            return $url;
+        }
+
+        return $url.'?v='.substr(hash_file('sha256', $filePath), 0, 12);
     }
 }

@@ -87,7 +87,9 @@ class SalonStageTest extends TestCase
             $this->get(route($route, ['salonSlug' => 'demo']))
                 ->assertOk()
                 ->assertSee('id="beautician-app"', false)
-                ->assertSee('data-scene=', false);
+                ->assertSee('data-scene=', false)
+                ->assertSee('images/beautician/avatar.webp?v=', false)
+                ->assertSee('images/character/stylist-greeting.webp?v=', false);
         }
     }
 
