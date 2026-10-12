@@ -29,10 +29,10 @@ class SalonKnowledgeItemSeeder extends Seeder
         return [
             [
                 'category' => SalonKnowledgeItem::CATEGORY_GENERAL, 'title' => 'Tentang Beauty Salon AI', 'tags' => ['about', 'cerita', 'story'], 'image_url' => null,
-                'body' => 'Beauty Salon AI adalah salon kecantikan butik di Senopati yang menggabungkan perawatan rambut, kuku, kulit, makeup, dan spa. Tim kami terdiri dari enam stylist berpengalaman. Kami buka setiap hari pukul 09.00 sampai 20.00.',
+                'body' => 'Beauty Salon AI adalah salon kecantikan butik di Senopati yang menggabungkan perawatan rambut, kuku, kulit, makeup, dan spa. Tim kami terdiri dari dua hair stylist, nail artist, terapis kulit, makeup artist, dan terapis spa. Salon buka setiap hari pukul 09.00 sampai 20.00; jadwal tiap anggota tim berbeda.',
                 'translations' => [
-                    'en' => ['title' => 'About Beauty Salon AI', 'body' => 'Beauty Salon AI is a boutique beauty salon in Senopati that brings hair, nails, skin, makeup and spa care together. Our team is six experienced stylists. We are open every day from 09:00 to 20:00.'],
-                    'ja' => ['title' => 'Beauty Salon AIについて', 'body' => 'Beauty Salon AIはスノパティにあるブティックサロンで、ヘア、ネイル、スキンケア、メイク、スパを一か所でご提供します。経験豊富な6名のスタイリストが在籍しています。毎日9:00〜20:00に営業しています。'],
+                    'en' => ['title' => 'About Beauty Salon AI', 'body' => 'Beauty Salon AI is a boutique beauty salon in Senopati that brings hair, nails, skin, makeup and spa care together. Our team includes two hair stylists, a nail artist, a skin therapist, a makeup artist and a spa therapist. The salon opens daily from 09:00 to 20:00; each team member works a different schedule.'],
+                    'ja' => ['title' => 'Beauty Salon AIについて', 'body' => 'Beauty Salon AIはスノパティにあるブティックサロンで、ヘア、ネイル、スキンケア、メイク、スパを一か所でご提供します。ヘアスタイリスト2名、ネイリスト、スキンセラピスト、メイクアップアーティスト、スパセラピストが在籍しています。毎日9:00〜20:00に営業し、スタッフの勤務時間はそれぞれ異なります。'],
                 ],
             ],
             [
@@ -53,10 +53,10 @@ class SalonKnowledgeItemSeeder extends Seeder
             ],
             [
                 'category' => SalonKnowledgeItem::CATEGORY_POLICIES, 'title' => 'Uji tempel (patch test) dan kulit sensitif', 'tags' => ['patch test', 'uji tempel', 'alergi', 'allergy', 'sensitif', 'sensitive'], 'image_url' => null,
-                'body' => 'Untuk pewarnaan, keratin, peeling, dan bulu mata, kami menyarankan uji tempel 48 jam sebelumnya bila Anda punya kulit sensitif atau riwayat alergi. Beri tahu stylist tentang alergi, kehamilan, atau kondisi medis sebelum perawatan dimulai.',
+                'body' => 'Beri tahu tim tentang riwayat alergi, kulit sensitif, dan kondisi yang dapat memengaruhi perawatan saat berkonsultasi. Tim akan mengonfirmasi produk yang digunakan serta kebutuhan uji tempel sebelum sesi.',
                 'translations' => [
-                    'en' => ['title' => 'Patch tests and sensitive skin', 'body' => 'For colour, keratin, peels and lashes we recommend a patch test 48 hours ahead if you have sensitive skin or a history of allergies. Please tell your stylist about any allergy, pregnancy or medical condition before the treatment starts.'],
-                    'ja' => ['title' => 'パッチテストと敏感肌', 'body' => 'カラー、ケラチン、ピーリング、まつげは、敏感肌やアレルギー歴がある方は48時間前のパッチテストをおすすめします。アレルギー、妊娠、持病がある場合は、施術前にスタイリストへお伝えください。'],
+                    'en' => ['title' => 'Patch tests and sensitive skin', 'body' => 'Tell the team about allergies, sensitive skin and any condition that may affect your treatment during the consultation. The team will confirm the products used and any patch-test requirements before your appointment.'],
+                    'ja' => ['title' => 'パッチテストと敏感肌', 'body' => 'カウンセリング時にアレルギー歴、敏感肌、施術に影響する可能性のある体調についてスタッフへお伝えください。施術前に使用製品とパッチテストの必要性を確認します。'],
                 ],
             ],
             [
@@ -68,27 +68,27 @@ class SalonKnowledgeItemSeeder extends Seeder
                 ],
             ],
             [
-                'category' => SalonKnowledgeItem::CATEGORY_FACILITIES, 'title' => 'Wi-Fi dan ruang tunggu', 'tags' => ['wifi', 'wi-fi', 'internet', 'tunggu', 'lounge', 'waiting'], 'image_url' => null,
-                'body' => 'Wi-Fi gratis dan ruang tunggu nyaman dengan sofa, majalah, serta teh dan air mineral tanpa biaya. Colokan tersedia di setiap kursi.',
+                'category' => SalonKnowledgeItem::CATEGORY_FACILITIES, 'title' => 'Wi-Fi dan ruang tunggu', 'tags' => ['wifi', 'wi-fi', 'internet', 'tunggu', 'lounge', 'waiting'], 'image_url' => 'images/scenes/salon-lobby.webp',
+                'body' => 'Wi-Fi gratis dan ruang tunggu nyaman dengan sofa, majalah, serta teh dan air mineral tanpa biaya. Colokan tersedia di area tunggu; minta bantuan tim bila Anda perlu mengisi daya.',
                 'translations' => [
-                    'en' => ['title' => 'Wi-Fi and waiting lounge', 'body' => 'Free Wi-Fi and a comfortable waiting lounge with sofas, magazines, and complimentary tea and water. Power outlets are at every chair.'],
-                    'ja' => ['title' => 'Wi-Fiとウェイティングラウンジ', 'body' => '無料Wi-Fiと、ソファ、雑誌、無料のお茶とお水を用意した快適なラウンジをご利用いただけます。各席にコンセントもあります。'],
+                    'en' => ['title' => 'Wi-Fi and waiting lounge', 'body' => 'Free Wi-Fi and a comfortable waiting lounge with sofas, magazines, and complimentary tea and water. Power outlets are available in the waiting area; ask the team if you need to charge a device.'],
+                    'ja' => ['title' => 'Wi-Fiとウェイティングラウンジ', 'body' => '無料Wi-Fiと、ソファ、雑誌、無料のお茶とお水を用意した快適なラウンジをご利用いただけます。待合スペースにコンセントをご用意しています。充電が必要な場合はスタッフへお声がけください。'],
                 ],
             ],
             [
                 'category' => SalonKnowledgeItem::CATEGORY_FACILITIES, 'title' => 'Ruang bridal privat', 'tags' => ['bridal', 'pengantin', 'private room', 'ruang privat', 'vip'], 'image_url' => null,
-                'body' => 'Ruang privat dengan cermin besar, pencahayaan makeup, dan area ganti untuk pengantin serta pendamping, dapat dipesan bersama paket pengantin.',
+                'body' => 'Ruang privat dengan cermin besar, pencahayaan makeup, dan area ganti untuk pengantin serta satu pendamping. Ketersediaan ruang dikonfirmasi bersama jadwal makeup pengantin.',
                 'translations' => [
-                    'en' => ['title' => 'Private bridal room', 'body' => 'A private room with a large mirror, makeup lighting and a changing area for the bride and her party, bookable together with a bridal package.'],
-                    'ja' => ['title' => 'ブライダル専用個室', 'body' => '大きな鏡、メイク用の照明、更衣スペースを備えた個室で、花嫁と付き添いの方がご利用いただけます。ブライダルパッケージと一緒にご予約ください。'],
+                    'en' => ['title' => 'Private bridal room', 'body' => 'A private room with a large mirror, makeup lighting and a changing area for the bride and one companion. Room availability is confirmed with the bridal makeup appointment.'],
+                    'ja' => ['title' => 'ブライダル専用個室', 'body' => '大きな鏡、メイク用の照明、更衣スペースを備えた個室で、花嫁と付き添いの方1名がご利用いただけます。ブライダルメイクのご予約時に空き状況を確認します。'],
                 ],
             ],
             [
-                'category' => SalonKnowledgeItem::CATEGORY_FACILITIES, 'title' => 'Parkir', 'tags' => ['parkir', 'parking', 'mobil', 'motor', 'valet'], 'image_url' => null,
-                'body' => 'Parkir gratis untuk 3 jam bagi tamu salon di basement gedung, dengan valet tersedia di akhir pekan. Parkir motor ada di depan.',
+                'category' => SalonKnowledgeItem::CATEGORY_FACILITIES, 'title' => 'Parkir', 'tags' => ['parkir', 'parking', 'mobil', 'motor'], 'image_url' => null,
+                'body' => 'Tempat parkir mobil dan motor tersedia dengan kapasitas terbatas. Ketersediaan mengikuti kondisi saat kedatangan; hubungi tim sebelum datang bersama rombongan.',
                 'translations' => [
-                    'en' => ['title' => 'Parking', 'body' => 'Free parking for 3 hours for salon guests in the building basement, with valet on weekends. Motorbike parking is at the front.'],
-                    'ja' => ['title' => '駐車場', 'body' => 'ご来店のお客様は、ビルの地下駐車場を3時間無料でご利用いただけます。週末はバレーサービスもあります。バイク用の駐輪場は正面にあります。'],
+                    'en' => ['title' => 'Parking', 'body' => 'Car and motorbike parking is available with limited capacity. Spaces depend on availability on arrival; contact the team before bringing a group.'],
+                    'ja' => ['title' => '駐車場', 'body' => '車とバイクの駐車スペースがありますが台数に限りがあります。ご到着時の空き状況によりますので、グループでご来店の場合は事前にスタッフへご相談ください。'],
                 ],
             ],
             [
@@ -101,18 +101,18 @@ class SalonKnowledgeItemSeeder extends Seeder
             ],
             [
                 'category' => SalonKnowledgeItem::CATEGORY_EVENTS, 'title' => 'Paket pengantin dan rombongan', 'tags' => ['pengantin', 'bridal', 'wedding', 'rombongan', 'group', 'bridesmaid'], 'image_url' => null,
-                'body' => 'Kami menyediakan paket pengantin (makeup, tata rambut, uji coba) dan paket rombongan untuk pendamping pengantin atau acara kantor. Karena jadwalnya perlu disusun bersama tim, permintaan rombongan diteruskan ke tim kami lewat percakapan atau WhatsApp.',
+                'body' => 'Makeup pengantin dan tata rambut tersedia sebagai layanan terpisah dengan harga pada katalog. Trial, layanan di lokasi acara, dan permintaan rombongan perlu dikonfirmasi oleh tim; belum termasuk dalam harga atau durasi layanan yang ditampilkan.',
                 'translations' => [
-                    'en' => ['title' => 'Bridal and group packages', 'body' => 'We offer bridal packages (makeup, hair and a trial) and group packages for a bridal party or an office event. Because the schedule is planned with the team, group requests are passed to our team through the chat or WhatsApp.'],
-                    'ja' => ['title' => 'ブライダル・グループパッケージ', 'body' => 'ブライダルパッケージ（メイク、ヘア、リハーサル）と、付き添いの方や社内イベント向けのグループパッケージをご用意しています。スケジュールはスタッフと一緒に調整するため、グループのご依頼はチャットまたはWhatsAppでスタッフにお伝えします。'],
+                    'en' => ['title' => 'Bridal and group packages', 'body' => 'Bridal makeup and hairstyling are separate services with prices in the catalogue. Trials, attendance at the event venue and group requests need confirmation from the team; they are not included in the displayed prices or durations.'],
+                    'ja' => ['title' => 'ブライダル・グループパッケージ', 'body' => 'ブライダルメイクとヘアセットは、それぞれカタログ記載の料金でご利用いただけます。リハーサル、会場への同行、グループのご依頼はスタッフへの確認が必要で、表示料金や所要時間には含まれません。'],
                 ],
             ],
             [
                 'category' => SalonKnowledgeItem::CATEGORY_LOCATION, 'title' => 'Lokasi dan transportasi', 'tags' => ['lokasi', 'location', 'alamat', 'address', 'mrt', 'stasiun', 'station', 'grab'], 'image_url' => null,
-                'body' => 'Kami berada di Jl. Senopati Raya No. 21, Senopati, Jakarta. Ojek dan taksi online mudah ditemukan di depan salon, dan stasiun MRT terdekat bisa dicapai dengan sekali naik ojek.',
+                'body' => 'Kami berada di Jl. Senopati No. 21, Kebayoran Baru, Jakarta Selatan. Ojek dan taksi online mudah ditemukan di depan salon, dan stasiun MRT terdekat bisa dicapai dengan sekali naik ojek.',
                 'translations' => [
-                    'en' => ['title' => 'Location and transport', 'body' => 'We are at Jl. Senopati Raya No. 21, Senopati, Jakarta. Ride-hailing is easy to find out front, and the nearest MRT station is one short ride away.'],
-                    'ja' => ['title' => 'アクセス', 'body' => '住所はジャカルタ・スノパティのJl. Senopati Raya No. 21です。サロン前で配車アプリを利用しやすく、最寄りのMRT駅へも短い乗車で行けます。'],
+                    'en' => ['title' => 'Location and transport', 'body' => 'We are at Jl. Senopati No. 21, Kebayoran Baru, Jakarta Selatan. Ride-hailing is easy to find out front, and the nearest MRT station is one short ride away.'],
+                    'ja' => ['title' => 'アクセス', 'body' => '住所はジャカルタ南部、クバヨラン・バルのJl. Senopati No. 21です。サロン前で配車アプリを利用しやすく、最寄りのMRT駅へも短い乗車で行けます。'],
                 ],
             ],
             [
@@ -125,10 +125,10 @@ class SalonKnowledgeItemSeeder extends Seeder
             ],
             [
                 'category' => SalonKnowledgeItem::CATEGORY_FAQ, 'title' => 'Apakah produk yang dipakai halal?', 'tags' => ['halal', 'produk', 'products', 'vegan', 'bpom'], 'image_url' => null,
-                'body' => 'Banyak layanan kami memakai produk yang berlabel halal atau vegan; layanan tersebut ditandai di halaman layanan. Bila ada produk tertentu yang perlu Anda hindari, beri tahu stylist sebelum perawatan.',
+                'body' => 'Produk berbeda untuk tiap perawatan. Bila Anda memerlukan produk halal, vegan, atau ingin menghindari bahan tertentu, sampaikan kepada tim agar label dan ketersediaannya dapat dikonfirmasi sebelum booking.',
                 'translations' => [
-                    'en' => ['title' => 'Are your products halal?', 'body' => 'Many of our services use products labelled halal or vegan; those services are marked on the service page. If there is a particular product you need to avoid, tell your stylist before the treatment.'],
-                    'ja' => ['title' => '使用する製品はハラール対応ですか？', 'body' => '多くのメニューでハラールまたはヴィーガン表示のある製品を使用しており、メニューページに表示しています。避けたい製品がある場合は、施術前にスタイリストへお伝えください。'],
+                    'en' => ['title' => 'Are your products halal?', 'body' => 'Products vary by treatment. If you require halal or vegan products, or need to avoid an ingredient, tell the team so labels and availability can be confirmed before booking.'],
+                    'ja' => ['title' => '使用する製品はハラール対応ですか？', 'body' => '使用製品はメニューによって異なります。ハラールやヴィーガンの製品をご希望の場合、または避けたい成分がある場合は、ご予約前にスタッフへお伝えください。表示と在庫を確認します。'],
                 ],
             ],
             [
@@ -137,6 +137,22 @@ class SalonKnowledgeItemSeeder extends Seeder
                 'translations' => [
                     'en' => ['title' => 'Can I bring a reference photo?', 'body' => 'Please do. A reference photo helps your stylist understand the look you want, and they will be honest about what is realistic for your hair, nails or skin.'],
                     'ja' => ['title' => '参考写真を持って行っても良いですか？', 'body' => 'ぜひお持ちください。参考写真はご希望のイメージを共有するのに役立ち、スタイリストがお客様の髪、爪、肌で実現できる範囲を正直にお伝えします。'],
+                ],
+            ],
+            [
+                'category' => SalonKnowledgeItem::CATEGORY_FAQ, 'title' => 'Apakah semua stylist tersedia setiap hari?', 'tags' => ['jadwal', 'shift', 'istirahat', 'stylist', 'schedule'], 'image_url' => null,
+                'body' => 'Salon buka setiap hari, tetapi tiap stylist memiliki shift, waktu istirahat satu jam, dan satu hari libur mingguan. Pilih layanan, stylist, dan tanggal untuk melihat jam mulai yang masih tersedia; perawatan harus selesai sebelum shift berakhir.',
+                'translations' => [
+                    'en' => ['title' => 'Is every stylist available every day?', 'body' => 'The salon opens daily, but each stylist has a shift, a one-hour break and one weekly day off. Choose a service, stylist and date to see available start times; the treatment must finish before the shift ends.'],
+                    'ja' => ['title' => 'すべてのスタッフが毎日勤務していますか？', 'body' => 'サロンは毎日営業していますが、スタッフにはそれぞれ勤務時間、1時間の休憩、週1日の休日があります。メニュー、スタッフ、日付を選ぶと空いている開始時間をご確認いただけます。施術は勤務終了前に終わる必要があります。'],
+                ],
+            ],
+            [
+                'category' => SalonKnowledgeItem::CATEGORY_FAQ, 'title' => 'Apa yang perlu disiapkan sebelum datang?', 'tags' => ['persiapan', 'datang', 'consultation', 'prepare'], 'image_url' => null,
+                'body' => 'Datang sekitar 10 menit sebelum jadwal untuk konsultasi singkat. Bawa foto referensi bila ada, sampaikan riwayat perawatan serta produk yang perlu dihindari, dan konfirmasi cakupan layanan sebelum sesi dimulai.',
+                'translations' => [
+                    'en' => ['title' => 'How should I prepare for my visit?', 'body' => 'Arrive around 10 minutes before your appointment for a short consultation. Bring any reference photos, share your treatment history and products to avoid, and confirm what the service includes before it begins.'],
+                    'ja' => ['title' => '来店前に何を準備すればよいですか？', 'body' => '短いカウンセリングのため、ご予約の約10分前にご来店ください。参考写真があればご持参いただき、過去の施術や避けたい製品をお伝えください。施術前にメニューに含まれる内容を確認します。'],
                 ],
             ],
         ];

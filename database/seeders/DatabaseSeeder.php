@@ -17,14 +17,13 @@ class DatabaseSeeder extends Seeder
         if (app()->environment('local', 'testing')) {
             $this->call([
                 UserSeeder::class,
-                SalonSeeder::class,
+                SalonDemoSeeder::class,
                 SalonUserSeeder::class,
-                ServiceSeeder::class,
-                StylistSeeder::class,
-                StylistImageSeeder::class,
-                StylistSlotSeeder::class,
-                SalonKnowledgeItemSeeder::class,
             ]);
+
+            return;
         }
+
+        $this->command?->warn('Demo data was skipped. To load the sample salon explicitly, run: php artisan db:seed --class=SalonDemoSeeder --force');
     }
 }
