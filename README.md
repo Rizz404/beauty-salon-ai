@@ -15,6 +15,8 @@ Satu aplikasi bisa melayani beberapa salon. Setiap salon punya halaman sendiri d
   - Tahu di halaman mana tamu berada (layanan atau stylist yang sedang dilihat, form janji temu yang sedang diisi), jadi bisa menjawab "perawatan ini".
   - Menjawab dalam bahasa yang ditulis tamu.
   - Menampilkan kartu layanan, stylist dengan jam kosong, dan ketersediaan langsung di dalam chat.
+  - Janji temu bisa dibuat sampai tuntas di chat: nama dan kontak (telepon/WhatsApp atau email) divalidasi, permintaan yang sama tidak membuat janji ganda, dan kartu konfirmasi membawa tautan WhatsApp, telepon, dan email salon.
+  - Balasan AI dirender sebagai paragraf, daftar, dan teks tebal (aman dari HTML), ada tombol **Chat baru**, tombol lebarkan panel di desktop, dan input suara lewat mikrofon browser.
 - **Janji temu**: pilih layanan, stylist yang menguasainya, tanggal, lalu jam mulai. Jam yang ditawarkan sudah pasti muat untuk seluruh durasi layanan. Permintaan dikirim dengan status `pending`; tim yang mengonfirmasi. Tidak ada pembayaran di muka.
 
 ### Sisi admin (`/admin`)
@@ -34,7 +36,7 @@ Hari kerja setiap stylist dipecah menjadi blok 30 menit (tabel `stylist_slots`).
 
 Kode ada di [app/Modules/Assistant/](app/Modules/Assistant) (model, prompt, tool) dan [app/Modules/Conversation/](app/Modules/Conversation) (satu giliran percakapan).
 
-- **[ReplyToGuest](app/Modules/Conversation/Actions/ReplyToGuest.php)** menjalankan satu giliran percakapan dan menyimpan riwayatnya di database. Ia memanggil model lewat [ModelGateway](app/Modules/Assistant/Gateway/ModelGateway.php), yaitu endpoint chat yang kompatibel dengan OpenAI (LM Studio atau Ollama yang di-host sendiri), lalu menjalankan loop tool-calling (maksimal 6 putaran per giliran). Request dikirim dengan `reasoning_effort=none` agar model tidak melakukan fase berpikir panjang. Seluruh giliran dibatasi 85 detik supaya muat dalam batas 100 detik Cloudflare. Semua anggaran ini ada di [config/assistant.php](config/assistant.php). Prompt disusun oleh [PromptComposer](app/Modules/Assistant/Prompt/PromptComposer.php).
+- **[ReplyToGuest](app/Modules/Conversation/Actions/ReplyToGuest.php)** menjalankan satu giliran percakapan dan menyimpan riwayatnya di database. Ia memanggil model lewat [ModelGateway](app/Modules/Assistant/Gateway/ModelGateway.php), yaitu endpoint chat yang kompatibel dengan OpenAI (LM Studio atau Ollama yang di-host sendiri), lalu menjalankan loop tool-calling (maksimal 6 putaran per giliran). Request dikirim dengan `reasoning_effort=none` agar model tidak melakukan fase berpikir panjang. Seluruh giliran dibatasi 85 detik supaya muat dalam batas 100 detik Cloudflare. Semua anggaran ini ada di [config/assistant.php](config/assistant.php). Prompt disusun oleh [PromptComposer](app/Modules/Assistant/Prompt/PromptComposer.php), sedangkan teksnya ada di [Templates/*.json](app/Modules/Assistant/Prompt/Templates) (dimuat oleh `PromptLibrary`), sehingga redaksi prompt bisa diubah tanpa menyentuh PHP.
 - **[ToolRegistry](app/Modules/Assistant/Tools/ToolRegistry.php)** adalah daftar putih alat yang bisa dipanggil model; satu alat satu kelas di [Handlers/](app/Modules/Assistant/Tools/Handlers). Semua fakta salon, layanan, harga, durasi, dan jadwal harus lewat sini, karena model sendiri tidak dipercaya menyimpan data apa pun.
 
   | Tool                         | Fungsi                                                                              |
