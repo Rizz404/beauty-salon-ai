@@ -24,22 +24,22 @@ return [
     |--------------------------------------------------------------------------
     |
     | The small round picture of the stylist used beside chat and narration,
-    | and the artwork per scene: a plain illustrated background plus one
-    | cut-out of the stylist layered in front, so she can stand clear of the
-    | panels. Scenes without artwork of their own borrow another scene's.
+    | and the photography per scene: a salon backdrop plus a stylist portrait
+    | layered in front, so she can stand clear of the panels. The original
+    | SVG artwork remains in public/images alongside the photos.
     |
     */
 
-    'avatar_image' => 'images/beautician/avatar.svg',
+    'avatar_image' => 'images/beautician/avatar.webp',
 
     'scenes' => [
-        'home' => ['image' => 'images/scenes/salon-lobby.svg', 'character' => 'images/character/stylist-greeting.svg', 'focus' => 'center 40%', 'focusMobile' => '50% 30%', 'anchor' => 'left', 'text' => 'top'],
-        'services' => ['image' => 'images/scenes/services.svg', 'character' => 'images/character/stylist-greeting.svg', 'focus' => 'center 40%', 'focusMobile' => '50% 30%', 'anchor' => 'left', 'text' => 'top'],
-        'stylists' => ['image' => 'images/scenes/stylists.svg', 'character' => 'images/character/stylist-greeting.svg', 'focus' => 'center 45%', 'focusMobile' => '60% 30%', 'anchor' => 'left', 'text' => 'top'],
-        'facilities' => ['image' => 'images/scenes/facilities.svg', 'character' => 'images/character/stylist-greeting.svg', 'focus' => 'center 45%', 'focusMobile' => '30% 30%', 'anchor' => 'left', 'text' => 'bottom'],
-        'info' => ['image' => 'images/scenes/info.svg', 'character' => 'images/character/stylist-greeting.svg', 'focus' => 'center 45%', 'focusMobile' => '70% 30%', 'anchor' => 'left', 'text' => 'bottom'],
-        'staff' => ['image' => 'images/scenes/salon-lobby.svg', 'character' => 'images/character/stylist-greeting.svg', 'focus' => 'center 40%', 'focusMobile' => '60% 30%', 'anchor' => 'left', 'text' => 'top'],
-        'appointment' => ['image' => 'images/scenes/appointment.svg', 'character' => 'images/character/stylist-greeting.svg', 'focus' => 'center 45%', 'focusMobile' => '30% 30%', 'anchor' => 'left', 'text' => 'bottom'],
+        'home' => ['image' => 'images/scenes/salon-lobby.webp', 'character' => 'images/character/stylist-greeting.webp', 'focus' => 'center 40%', 'focusMobile' => '50% 30%', 'anchor' => 'left', 'text' => 'top'],
+        'services' => ['image' => 'images/scenes/services.webp', 'character' => 'images/character/stylist-greeting.webp', 'focus' => 'center 40%', 'focusMobile' => '50% 30%', 'anchor' => 'left', 'text' => 'top'],
+        'stylists' => ['image' => 'images/scenes/stylists.webp', 'character' => 'images/character/stylist-greeting.webp', 'focus' => 'center 45%', 'focusMobile' => '60% 30%', 'anchor' => 'left', 'text' => 'top'],
+        'facilities' => ['image' => 'images/scenes/facilities.webp', 'character' => 'images/character/stylist-greeting.webp', 'focus' => 'center 45%', 'focusMobile' => '30% 30%', 'anchor' => 'left', 'text' => 'bottom'],
+        'info' => ['image' => 'images/scenes/info.webp', 'character' => 'images/character/stylist-greeting.webp', 'focus' => 'center 45%', 'focusMobile' => '70% 30%', 'anchor' => 'left', 'text' => 'bottom'],
+        'staff' => ['image' => 'images/scenes/salon-lobby.webp', 'character' => 'images/character/stylist-greeting.webp', 'focus' => 'center 40%', 'focusMobile' => '60% 30%', 'anchor' => 'left', 'text' => 'top'],
+        'appointment' => ['image' => 'images/scenes/appointment.webp', 'character' => 'images/character/stylist-greeting.webp', 'focus' => 'center 45%', 'focusMobile' => '30% 30%', 'anchor' => 'left', 'text' => 'bottom'],
     ],
 
     'scene_artwork' => [

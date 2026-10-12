@@ -85,7 +85,7 @@ class Service extends Model
     }
 
     /**
-     * The picture to show: a full URL as stored, or a file under public/.
+     * The picture to show, preferring a local photo for legacy service artwork.
      */
     public function getImageSourceAttribute(): ?string
     {
@@ -93,7 +93,17 @@ class Service extends Model
             return null;
         }
 
-        return str_starts_with($this->image_url, 'http') ? $this->image_url : asset($this->image_url);
+        $imagePath = $this->image_url;
+
+        if (preg_match('/\Aimages\/services\/[a-z0-9-]+\.svg\z/', $imagePath) === 1) {
+            $photoPath = substr($imagePath, 0, -4).'.webp';
+
+            if (is_file(public_path($photoPath))) {
+                $imagePath = $photoPath;
+            }
+        }
+
+        return str_starts_with($imagePath, 'http') ? $imagePath : asset($imagePath);
     }
 
     /**

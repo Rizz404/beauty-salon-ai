@@ -3,7 +3,7 @@
 namespace App\Modules\Experience\Presenters;
 
 /**
- * Artwork for a scene: an illustrated background, the beautician cut-out and
+ * Photography for a scene: a salon background, the beautician portrait and
  * where she stands, so the scene's text and panels stay clear of her.
  */
 final class StageBackdrop
