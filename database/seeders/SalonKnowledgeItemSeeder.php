@@ -155,6 +155,14 @@ class SalonKnowledgeItemSeeder extends Seeder
                     'ja' => ['title' => '来店前に何を準備すればよいですか？', 'body' => '短いカウンセリングのため、ご予約の約10分前にご来店ください。参考写真があればご持参いただき、過去の施術や避けたい製品をお伝えください。施術前にメニューに含まれる内容を確認します。'],
                 ],
             ],
+            [
+                'category' => SalonKnowledgeItem::CATEGORY_GENERAL, 'title' => 'Jam buka salon', 'tags' => ['jam buka', 'jam operasional', 'buka', 'tutup', 'opening hours', 'hours', 'open', 'close', '営業時間', '営業', '何時'], 'image_url' => null,
+                'body' => 'Salon buka setiap hari, Senin sampai Minggu, pukul 09.00 sampai 20.00 WIB. Jam mulai janji temu tersedia setiap 30 menit selama jam buka, dan perawatan harus selesai sebelum salon tutup.',
+                'translations' => [
+                    'en' => ['title' => 'Opening hours', 'body' => 'The salon is open every day, Monday to Sunday, from 09:00 to 20:00 (Jakarta time). Appointment start times are offered every 30 minutes during opening hours, and treatments must finish before the salon closes.'],
+                    'ja' => ['title' => '営業時間', 'body' => 'サロンは毎日（月曜日〜日曜日）9:00〜20:00（ジャカルタ時間）に営業しています。予約の開始時刻は営業時間内で30分ごとにお選びいただけ、施術は閉店時刻までに終了します。'],
+                ],
+            ],
         ];
     }
 }

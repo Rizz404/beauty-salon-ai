@@ -35,7 +35,7 @@ class SalonDemoSeederTest extends TestCase
         $this->assertDatabaseCount('services', 16);
         $this->assertDatabaseCount('stylists', 6);
         $this->assertDatabaseCount('stylist_images', 12);
-        $this->assertDatabaseCount('salon_knowledge_items', 16);
+        $this->assertDatabaseCount('salon_knowledge_items', 17);
         $this->assertDatabaseCount('users', 0);
         $this->assertDatabaseCount('salon_users', 0);
         $this->assertDatabaseCount('appointments', 0);
@@ -128,7 +128,7 @@ class SalonDemoSeederTest extends TestCase
         $this->assertDatabaseCount('services', 16);
         $this->assertDatabaseCount('stylists', 6);
         $this->assertDatabaseCount('stylist_images', 12);
-        $this->assertDatabaseCount('salon_knowledge_items', 16);
+        $this->assertDatabaseCount('salon_knowledge_items', 17);
         $this->assertDatabaseCount('stylist_slots', $slotCount);
         $this->assertDatabaseHas('stylist_slots', ['id' => $slot->id, 'is_booked' => true]);
     }
