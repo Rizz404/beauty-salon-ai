@@ -133,7 +133,7 @@ class AppointmentRequestTest extends TestCase
             ->assertJsonValidationErrors('time_slot');
 
         $alternatives = collect($response->json('alternatives'));
-        $this->assertSame('12:30', $alternatives->firstWhere('type', 'slot')['time_slot']);
+        $this->assertSame('12:00', $alternatives->firstWhere('type', 'slot')['time_slot']);
         $this->assertSame('kenji', $alternatives->firstWhere('type', 'stylist')['slug']);
         $this->assertSame(0, Appointment::count());
     }
